@@ -1,0 +1,5 @@
+#include "Pods-ios-demo-AFNetworking.xcconfig"
+GCC_PREPROCESSOR_DEFINITIONS = COCOAPODS=1
+HEADER_SEARCH_PATHS = "${PODS_ROOT}/BuildHeaders" "${PODS_ROOT}/BuildHeaders/AFNetworking" "${PODS_ROOT}/Headers" "${PODS_ROOT}/Headers/AFNetworking" "${PODS_ROOT}/Headers/AZSocketIO" "${PODS_ROOT}/Headers/SocketRocket" "${PODS_ROOT}/Headers/TLKSimpleWebRTC" "${PODS_ROOT}/Headers/TLKWebRTC" "${PODS_ROOT}/Headers/webrtc-ios"
+OTHER_LDFLAGS = -ObjC ${PODS_IOS_DEMO_AFNETWORKING_OTHER_LDFLAGS}
+PODS_ROOT = ${SRCROOT}
