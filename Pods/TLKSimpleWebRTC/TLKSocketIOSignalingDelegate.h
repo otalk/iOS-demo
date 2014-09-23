@@ -6,6 +6,7 @@
 #import <Foundation/Foundation.h>
 
 @class TLKSocketIOSignaling;
+@class TLKMediaStreamWrapper;
 
 @protocol TLKSocketIOSignalingDelegate <NSObject>
 

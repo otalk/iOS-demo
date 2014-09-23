@@ -43,7 +43,7 @@
 
 @implementation TLKSocketIOSignaling
 
-- (id)initAllowingVideo:(BOOL)allowVideo {
+- (instancetype)initAllowingVideo:(BOOL)allowVideo {
     self = [super init];
     if (self) {
         self->_allowVideo = allowVideo;
@@ -52,6 +52,10 @@
     return self;
 }
 
+- (instancetype)init
+{
+    return [self initAllowingVideo:YES];
+}
 
 - (BOOL)roomIsLocked {
     return [self.roomKey length] > 0;

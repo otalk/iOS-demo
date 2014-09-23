@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "TLKSimpleWebRTC"
-  s.version      = "0.0.2"
+  s.version      = "0.0.3"
   s.summary      = "A iOS interface to a SimpleWebRTC based signalling server using Socket.io"
   s.homepage     = "https://github.com/otalk/TLKSimpleWebRTC"
   s.license      = { :type => "MIT", :file => "LICENSE" }

@@ -12,7 +12,8 @@
 // -------------------------------------------------------
 @interface TLKSocketIOSignaling : NSObject <TLKSignalDelegate>
 
-- (id)initAllowingVideo:(BOOL)allowVideo;
+- (instancetype)initAllowingVideo:(BOOL)allowVideo;
+- (instancetype)init; // allows video by default
 
 -(void)connectToServer:(NSString*)apiServer success:(void(^)(void))successCallback failure:(void(^)(NSError*))failureCallback;
 -(void)connectToServer:(NSString*)apiServer port:(int)port secure:(BOOL)secure success:(void(^)(void))successCallback failure:(void(^)(NSError*))failureCallback;
