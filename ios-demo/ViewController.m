@@ -27,7 +27,7 @@
     
     self.signaling.delegate = self;
 
-    [self.signaling connectToServer:@"signaling.simplewebrtc.com" port:8888 secure:NO success:^{
+    [self.signaling connectToServer:@"signaling.simplewebrtc.com" port:80 secure:NO success:^{
         [self.signaling joinRoom:@"ios-demo" success:^{
             NSLog(@"join success");
         } failure:^{
