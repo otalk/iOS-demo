@@ -5,6 +5,10 @@
 
 #import <UIKit/UIKit.h>
 
+@class TLKMediaStreamWrapper;
+
 @interface ViewController : UIViewController
+
+-(void)addedStream:(TLKMediaStreamWrapper *)stream;
 
 @end
