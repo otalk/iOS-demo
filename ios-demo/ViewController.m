@@ -7,19 +7,13 @@
 #import "TLKSocketIOSignaling.h"
 #import "TLKMediaStreamWrapper.h"
 #import "TLKSocketIOSignalingDelegate.h"
-#import "RTCVideoRenderer.h"
 #import "RTCVideoTrack.h"
 #import "RTCEAGLVideoView.h"
-#import "RTCVideoCapturer.h"
 #import "RTCVideoTrack.h"
-#import "RTCMediaConstraints.h"
-#import "RTCPeerConnectionFactory.h"
 
-@interface ViewController () <TLKSocketIOSignalingDelegate, RTCVideoRenderer, RTCEAGLVideoViewDelegate>
+@interface ViewController () <TLKSocketIOSignalingDelegate, RTCEAGLVideoViewDelegate>
 
 @property (strong, nonatomic) TLKSocketIOSignaling* signaling;
-@property (strong, nonatomic) UIView* renderView;
-//@property (strong, nonatomic) RTCVideoRenderer* renderer;
 @property (strong, nonatomic) IBOutlet RTCEAGLVideoView *remoteView;
 @property (strong, nonatomic) IBOutlet RTCEAGLVideoView *localView;
 @property (strong, nonatomic) RTCVideoTrack *localVideoTrack;
@@ -38,6 +32,7 @@
     [self.localView setDelegate:self];
     
     self.signaling = [[TLKSocketIOSignaling alloc] initAllowingVideo:YES];
+    //TLKSocketIOSignalingDelegate provides signaling notifications
     self.signaling.delegate = self;
     [self.signaling connectToServer:@"signaling.simplewebrtc.com" port:80 secure:NO success:^{
         [self.signaling joinRoom:@"ios-demo" success:^{
@@ -49,16 +44,6 @@
     } failure:^(NSError* error) {
         NSLog(@"connect failure");
     }];
-    
-	// Do any additional setup after loading the view, typically from a nib.
-}
-
-
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 
@@ -80,8 +65,6 @@
 
 }
 
-
-
 -(void)serverRequiresPassword:(TLKSocketIOSignaling*)server{
     NSLog(@"serverRequiresPassword");
 }
@@ -98,21 +81,11 @@
     NSLog(@"locked");
 }
 
+
 #pragma mark - RTCEAGLVideoViewDelegate
 
 -(void)videoView:(RTCEAGLVideoView *)videoView didChangeVideoSize:(CGSize)size {
     NSLog(@"videoView ?");
-}
-
-#pragma mark - RTCVideoRenderer
-
--(void)renderFrame:(RTCI420Frame *)frame {
-    NSLog(@"renderFrame ?");
-    [self.remoteView renderFrame:frame];
-
-}
--(void)setSize:(CGSize)size {
-    NSLog(@"setSize ?");
 }
 
 

@@ -1,0 +1,39 @@
+PODS:
+  - AFNetworking (1.3.4)
+  - AZSocketIO (0.0.5):
+    - AFNetworking (~> 1.x)
+    - SocketRocket (~> 0.x)
+  - libjingle_peerconnection (9280.2.0)
+  - SocketRocket (0.3.1-beta2)
+  - TLKSimpleWebRTC (0.0.3):
+    - AZSocketIO (= 0.0.5)
+  - TLKWebRTC (1.0.0)
+
+DEPENDENCIES:
+  - libjingle_peerconnection
+  - TLKSimpleWebRTC (from `https://github.com/otalk/TLKSimpleWebRTC.git`)
+  - TLKWebRTC (from `https://github.com/evermeer/TLKWebRTC.git`)
+
+EXTERNAL SOURCES:
+  TLKSimpleWebRTC:
+    :git: https://github.com/otalk/TLKSimpleWebRTC.git
+  TLKWebRTC:
+    :git: https://github.com/evermeer/TLKWebRTC.git
+
+CHECKOUT OPTIONS:
+  TLKSimpleWebRTC:
+    :commit: c1e567120675ce7bd84398e2ea09f0b1ac360d90
+    :git: https://github.com/otalk/TLKSimpleWebRTC.git
+  TLKWebRTC:
+    :commit: d2de108e7dc9caeaa706a72251460751379135ca
+    :git: https://github.com/evermeer/TLKWebRTC.git
+
+SPEC CHECKSUMS:
+  AFNetworking: cf8e418e16f0c9c7e5c3150d019a3c679d015018
+  AZSocketIO: 0d9604933c1509fa2f6d755f8a4df235fe3eac6c
+  libjingle_peerconnection: 4f8dee759c84facd7fa7bf7811735af124932e6e
+  SocketRocket: 7284ab9370a06c99aba92b2fe3a32aedd0f9a6fa
+  TLKSimpleWebRTC: 2653a9002d2022ce9b2c8a57d1608b9b60cbb0a7
+  TLKWebRTC: 958d7a51631458b5638810bf4acb9c25b7c5aec5
+
+COCOAPODS: 0.37.1
