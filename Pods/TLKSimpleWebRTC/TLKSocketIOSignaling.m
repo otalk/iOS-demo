@@ -29,7 +29,6 @@
 
 @property (nonatomic, strong) AZSocketIO* socket;
 @property (nonatomic, strong) TLKWebRTC* webRTC;
-
 @property (nonatomic, readwrite) NSString* roomName;
 @property (nonatomic, readwrite) NSString* roomKey;
 
@@ -257,7 +256,6 @@
 
 - (void)eventReceived:(NSString*)eventName withData:(id)data {
     NSDictionary* dictionary;
-    
     if ([eventName isEqualToString:@"locked"]) {
         self.roomKey = (NSString*)[data objectAtIndex:0];
         if([self.delegate respondsToSelector:@selector(lockChange:)]) {
@@ -287,6 +285,8 @@
             dictionary = nil;
         }
     }
+
+    NSLog(@"eventName = %@, type = %@, from = %@, to = %@",eventName, dictionary[@"type"], dictionary[@"from"], dictionary[@"to"]);
     
     if ([dictionary[@"type"] isEqualToString:@"iceFailed"]) {
         [[[UIAlertView alloc] initWithTitle:@"Connection Failed" message:@"Talky could not establish a connection to a participant in this chat. Please try again later." delegate:nil cancelButtonTitle:@"Continue" otherButtonTitles:nil] show];
@@ -361,7 +361,7 @@
                            @"roomType": @"video",
                            @"type": @"candidate",
                            @"payload": @{ @"candidate" : @{@"sdpMid": candidate.sdpMid,
-                                                           @"sdpMLineIndex": [NSString stringWithFormat:@"%d", candidate.sdpMLineIndex],
+                                                           @"sdpMLineIndex": [NSString stringWithFormat:@"%ld", (long)candidate.sdpMLineIndex],
                                                            @"candidate": candidate.sdp}}};
     NSError* error;
     [self.socket emit:@"message" args:@[args] error:&error];
