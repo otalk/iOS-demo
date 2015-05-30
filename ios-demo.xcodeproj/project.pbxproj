@@ -219,9 +219,6 @@
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = OTalk;
 				TargetAttributes = {
-					A64107CE19B1241F00725AA0 = {
-						DevelopmentTeam = 443FV7F3ZK;
-					};
 					A64107EF19B1241F00725AA0 = {
 						TestTargetID = A64107CE19B1241F00725AA0;
 					};
