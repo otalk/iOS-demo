@@ -17,7 +17,7 @@ Here's the Podfile that we use for that:
 
     target "ios-demo" do
     
-	pod 'webrtc-ios', :git => 'https://github.com/otalk/webrtc-ios.git'
+	pod 'libjingle_peerconnection'
 	pod 'TLKWebRTC', :git => 'https://github.com/otalk/TLKWebRTC.git'
 	pod 'TLKSimpleWebRTC', :git => 'https://github.com/otalk/TLKSimpleWebRTC.git'
 

@@ -22,12 +22,12 @@ AZSocketIO uses NSJSONSerialization, so it's iOS 5+.
 Usage
 -----
 ``` objective-c
-AZSocketIO *socket = [[AZSocketIO alloc] initWithHost:@"localhost" andPort:@"9000"];
+AZSocketIO *socket = [[AZSocketIO alloc] initWithHost:@"localhost" andPort:@"9000" secure:NO];
 [socket setEventRecievedBlock:^(NSString *eventName, id data) {
     NSLog(@"%@ : %@", eventName, data);
 }];
 [socket connectWithSuccess:^{
-	[socket emit:@"Send Me Data" args:@"cows" error:nil];
+    [socket emit:@"Send Me Data" args:@"cows" error:nil];
 } andFailure:^(NSError *error) {
     NSLog(@"Boo: %@", error);
 }];

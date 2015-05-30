@@ -19,11 +19,11 @@
 //
 
 #import "AZSocketIO.h"
-#import "AFHTTPClient.h"
 #import "AZSocketIOTransport.h"
 #import "AZWebsocketTransport.h"
 #import "AZxhrTransport.h"
 #import "AZSocketIOPacket.h"
+#import <AFNetworking.h>
 
 #define PROTOCOL_VERSION @"1"
 
@@ -39,7 +39,7 @@ NSString * const AZSocketIODefaultNamespace = @"";
 
 @property(nonatomic, strong)ConnectedBlock connectionBlock;
 
-@property(nonatomic, strong)AFHTTPClient *httpClient;
+@property(nonatomic, strong)AFHTTPRequestOperationManager *httpClient;
 @property(nonatomic, strong)NSDictionary *transportMap;
 
 @property(nonatomic, strong)NSMutableDictionary *ackCallbacks;
@@ -86,7 +86,14 @@ NSString * const AZSocketIODefaultNamespace = @"";
         NSString *urlString = [NSString stringWithFormat:@"%@%@:%@", protocolString,
                                self.host, self.port];
         
-        self.httpClient = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:urlString]];
+        self.httpClient = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:urlString]];
+//        NSMutableSet* types = [NSMutableSet setWithSet:self.httpClient.responseSerializer.acceptableContentTypes];
+//        [types addObject:@"text/plain"];
+//        self.httpClient.responseSerializer.acceptableContentTypes = types;
+        self.httpClient.requestSerializer.stringEncoding = NSUTF8StringEncoding;
+        self.httpClient.responseSerializer = [AFHTTPResponseSerializer serializer];
+        self.httpClient.responseSerializer.stringEncoding = NSUTF8StringEncoding;
+        
         self.ackCallbacks = [NSMutableDictionary dictionary];
         self.ackCount = 0;
         self.specificEventBlocks = [NSMutableDictionary new];
@@ -119,7 +126,7 @@ NSString * const AZSocketIODefaultNamespace = @"";
     self.connectionBlock = success;
     self.errorBlock = failure;
     NSString *urlString = [NSString stringWithFormat:@"socket.io/%@", PROTOCOL_VERSION];
-    [self.httpClient getPath:urlString
+    [self.httpClient GET:urlString
                   parameters:nil
                      success:^(AFHTTPRequestOperation *operation, id responseObject) {
                          NSString *response = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
@@ -325,7 +332,7 @@ NSString * const AZSocketIODefaultNamespace = @"";
 
 #pragma mark event callback registration
 
-- (void)addCallbackForEventName:(NSString *)name callback:(EventRecievedBlock)block
+- (void)addCallbackForEventName:(NSString *)name callback:(EventReceivedBlock)block
 {
     NSMutableArray *callbacks = [self.specificEventBlocks objectForKey:name];
     if (callbacks == nil) {
@@ -335,7 +342,7 @@ NSString * const AZSocketIODefaultNamespace = @"";
     [callbacks addObject:block];
 }
 
-- (BOOL)removeCallbackForEvent:(NSString *)name callback:(EventRecievedBlock)block
+- (BOOL)removeCallbackForEvent:(NSString *)name callback:(EventReceivedBlock)block
 {
     NSMutableArray *callbacks = [self.specificEventBlocks objectForKey:name];
     if (callbacks != nil) {
@@ -363,7 +370,7 @@ NSString * const AZSocketIODefaultNamespace = @"";
 }
 
 - (void)setValue:(NSString *)value forHTTPHeaderField:(NSString *)field {
-    [self.httpClient setDefaultHeader:field value:value];
+    [self.httpClient.requestSerializer setValue:value forHTTPHeaderField:field];
 }
 
 #pragma mark heartbeat
@@ -419,8 +426,8 @@ NSString * const AZSocketIODefaultNamespace = @"";
             [self.transport send:message];
             break;
         case MESSAGE:
-            if (self.messageRecievedBlock) {
-                self.messageRecievedBlock(packet.data);
+            if (self.messageReceivedBlock) {
+                self.messageReceivedBlock(packet.data);
             }
             break;
         case JSON_MESSAGE:
@@ -497,8 +504,8 @@ NSString * const AZSocketIODefaultNamespace = @"";
 
 - (void)didParseJSONMessage:(id)outData
 {
-    if (self.messageRecievedBlock) {
-        self.messageRecievedBlock(outData);
+    if (self.messageReceivedBlock) {
+        self.messageReceivedBlock(outData);
     }
 }
 
@@ -506,12 +513,12 @@ NSString * const AZSocketIODefaultNamespace = @"";
 {
     NSArray *callbackList = [self.specificEventBlocks objectForKey:[outData objectForKey:@"name"]];
     if (callbackList != nil) {
-        for (EventRecievedBlock block in callbackList) {
+        for (EventReceivedBlock block in [callbackList copy]) {
             block([outData objectForKey:@"name"], [outData objectForKey:@"args"]);
         }
     } else {
-        if (self.eventRecievedBlock) {
-            self.eventRecievedBlock([outData objectForKey:@"name"], [outData objectForKey:@"args"]);
+        if (self.eventReceivedBlock) {
+            self.eventReceivedBlock([outData objectForKey:@"name"], [outData objectForKey:@"args"]);
         }
     }
 }
