@@ -5,9 +5,8 @@
 
 #import "ViewController.h"
 #import "TLKSocketIOSignaling.h"
-#import "TLKMediaStreamWrapper.h"
-#import "TLKSocketIOSignalingDelegate.h"
-#import "RTCVideoTrack.h"
+#import "TLKMediaStream.h"
+#import "RTCMediaStream.h"
 #import "RTCEAGLVideoView.h"
 #import "RTCVideoTrack.h"
 
@@ -31,7 +30,7 @@
     [self.remoteView setDelegate:self];
     [self.localView setDelegate:self];
     
-    self.signaling = [[TLKSocketIOSignaling alloc] initAllowingVideo:YES];
+    self.signaling = [[TLKSocketIOSignaling alloc] initWithVideo:YES];
     //TLKSocketIOSignalingDelegate provides signaling notifications
     self.signaling.delegate = self;
     [self.signaling connectToServer:@"signaling.simplewebrtc.com" port:80 secure:NO success:^{
@@ -49,7 +48,7 @@
 
 #pragma mark - TLKSocketIOSignalingDelegate
 
--(void)addedStream:(TLKMediaStreamWrapper *)stream {
+-(void)addedStream:(TLKMediaStream *)stream {
     NSLog(@"addedStream");
 
     RTCVideoTrack *localVideoTrack = stream.stream.videoTracks[0];
@@ -68,7 +67,7 @@
 -(void)serverRequiresPassword:(TLKSocketIOSignaling*)server{
     NSLog(@"serverRequiresPassword");
 }
--(void)removedStream:(TLKMediaStreamWrapper*)stream{
+-(void)removedStream:(TLKMediaStream*)stream{
     NSLog(@"removedStream");
 }
 -(void)peer:(NSString*)peer toggledAudioMute:(BOOL)mute{
