@@ -48,10 +48,12 @@
 
 #pragma mark - TLKSocketIOSignalingDelegate
 
--(void)addedStream:(TLKMediaStream *)stream {
+
+
+- (void)socketIOSignaling:(TLKSocketIOSignaling *)socketIOSignaling addedStream:(TLKMediaStream *)stream {
     NSLog(@"addedStream");
 
-    RTCVideoTrack *localVideoTrack = stream.stream.videoTracks[0];
+    RTCVideoTrack *localVideoTrack = self.signaling.webRTC.localMediaStream.videoTracks[0];
     
     if(self.localVideoTrack) {
         [self.localVideoTrack removeRenderer:self.localView];
@@ -62,23 +64,35 @@
     self.localVideoTrack = localVideoTrack;
     [self.localVideoTrack addRenderer:self.localView];
 
+    
+    RTCVideoTrack *remoteVideoTrack = stream.stream.videoTracks[0];
+    
+    if(self.remoteVideoTrack) {
+        [self.remoteVideoTrack removeRenderer:self.remoteView];
+        self.remoteVideoTrack = nil;
+        [self.remoteView renderFrame:nil];
+    }
+    
+    self.remoteVideoTrack = remoteVideoTrack;
+    [self.remoteVideoTrack addRenderer:self.remoteView];
 }
 
--(void)serverRequiresPassword:(TLKSocketIOSignaling*)server{
+- (void)socketIOSignalingRequiresServerPassword:(TLKSocketIOSignaling *)socketIOSignaling{
     NSLog(@"serverRequiresPassword");
 }
--(void)removedStream:(TLKMediaStream*)stream{
+- (void)socketIOSignaling:(TLKSocketIOSignaling *)socketIOSignaling removedStream:(TLKMediaStream *)stream{
     NSLog(@"removedStream");
 }
--(void)peer:(NSString*)peer toggledAudioMute:(BOOL)mute{
+- (void)socketIOSignaling:(TLKSocketIOSignaling *)socketIOSignaling peer:(NSString *)peer toggledAudioMute:(BOOL)mute{
     NSLog(@"toggledAudioMute");
 }
--(void)peer:(NSString*)peer toggledVideoMute:(BOOL)mute{
+- (void)socketIOSignaling:(TLKSocketIOSignaling *)socketIOSignaling peer:(NSString *)peer toggledVideoMute:(BOOL)mute{
     NSLog(@"toggledVideoMute");
 }
--(void)lockChange:(BOOL)locked{
+- (void)socketIOSignaling:(TLKSocketIOSignaling *)socketIOSignaling didChangeLock:(BOOL)locked{
     NSLog(@"locked");
 }
+
 
 
 #pragma mark - RTCEAGLVideoViewDelegate
