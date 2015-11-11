@@ -51,16 +51,16 @@
 - (void)socketIOSignaling:(TLKSocketIOSignaling *)socketIOSignaling addedStream:(TLKMediaStream *)stream {
     NSLog(@"addedStream");
 
-    RTCVideoTrack *localVideoTrack = stream.stream.videoTracks[0];
-    
-    if(self.localVideoTrack) {
-        [self.localVideoTrack removeRenderer:self.localView];
-        self.localVideoTrack = nil;
-        [self.localView renderFrame:nil];
+    RTCVideoTrack *remoteVideoTrack = stream.stream.videoTracks[0];
+
+    if(self.remoteVideoTrack) {
+        [self.remoteVideoTrack removeRenderer:self.remoteView];
+        self.remoteVideoTrack = nil;
+        [self.remoteView renderFrame:nil];
     }
     
-    self.localVideoTrack = localVideoTrack;
-    [self.localVideoTrack addRenderer:self.localView];
+    self.remoteVideoTrack = remoteVideoTrack;
+    [self.remoteVideoTrack addRenderer:self.remoteView];
 
 }
 
