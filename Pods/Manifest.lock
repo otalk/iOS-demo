@@ -1,30 +1,30 @@
 PODS:
-  - AFNetworking (2.5.4):
-    - AFNetworking/NSURLConnection (= 2.5.4)
-    - AFNetworking/NSURLSession (= 2.5.4)
-    - AFNetworking/Reachability (= 2.5.4)
-    - AFNetworking/Security (= 2.5.4)
-    - AFNetworking/Serialization (= 2.5.4)
-    - AFNetworking/UIKit (= 2.5.4)
-  - AFNetworking/NSURLConnection (2.5.4):
+  - AFNetworking (2.6.3):
+    - AFNetworking/NSURLConnection (= 2.6.3)
+    - AFNetworking/NSURLSession (= 2.6.3)
+    - AFNetworking/Reachability (= 2.6.3)
+    - AFNetworking/Security (= 2.6.3)
+    - AFNetworking/Serialization (= 2.6.3)
+    - AFNetworking/UIKit (= 2.6.3)
+  - AFNetworking/NSURLConnection (2.6.3):
     - AFNetworking/Reachability
     - AFNetworking/Security
     - AFNetworking/Serialization
-  - AFNetworking/NSURLSession (2.5.4):
+  - AFNetworking/NSURLSession (2.6.3):
     - AFNetworking/Reachability
     - AFNetworking/Security
     - AFNetworking/Serialization
-  - AFNetworking/Reachability (2.5.4)
-  - AFNetworking/Security (2.5.4)
-  - AFNetworking/Serialization (2.5.4)
-  - AFNetworking/UIKit (2.5.4):
+  - AFNetworking/Reachability (2.6.3)
+  - AFNetworking/Security (2.6.3)
+  - AFNetworking/Serialization (2.6.3)
+  - AFNetworking/UIKit (2.6.3):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
   - AZSocketIO (0.0.6):
     - AFNetworking (~> 2.x)
     - SocketRocket (~> 0.x)
-  - libjingle_peerconnection (9297.2.0)
-  - SocketRocket (0.3.1-beta2)
+  - libjingle_peerconnection (10604.2.2)
+  - SocketRocket (0.4.2)
   - TLKSimpleWebRTC (1.0.0):
     - AZSocketIO (= 0.0.6)
   - TLKWebRTC (2.0.1)
@@ -42,18 +42,18 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   TLKSimpleWebRTC:
-    :commit: 8ee1ce09550ef0ee2efc68e94a4ebe29a6474703
+    :commit: a459335423e98e4540222a86e457f7778c0d9b05
     :git: https://github.com/otalk/TLKSimpleWebRTC.git
   TLKWebRTC:
-    :commit: c081d508275f87850a2004ad5711ff79c2003375
+    :commit: 738d9f9cb4ec30affeeaf79b249208baceb202a4
     :git: https://github.com/otalk/TLKWebRTC.git
 
 SPEC CHECKSUMS:
-  AFNetworking: 05edc0ac4c4c8cf57bcf4b84be5b0744b6d8e71e
+  AFNetworking: cb8d14a848e831097108418f5d49217339d4eb60
   AZSocketIO: 135d76d11e90a0b7509f0f64d448fc8d0cd96e4f
-  libjingle_peerconnection: 2144b25206d496f4a2678217780b91126057df12
-  SocketRocket: 7284ab9370a06c99aba92b2fe3a32aedd0f9a6fa
+  libjingle_peerconnection: e2068e7c6859c64409345931ee035616c893c107
+  SocketRocket: ffe08119b00ef982f6c37052a4705a057c8494ad
   TLKSimpleWebRTC: be2ec60106ed78c034c2a85a2945c49ccf92131f
   TLKWebRTC: 213224bfeec6e89ac829cd11a593e0f04a845df1
 
-COCOAPODS: 0.37.1
+COCOAPODS: 0.39.0
