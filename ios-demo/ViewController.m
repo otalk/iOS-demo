@@ -48,7 +48,7 @@
 
 #pragma mark - TLKSocketIOSignalingDelegate
 
--(void)addedStream:(TLKMediaStream *)stream {
+- (void)socketIOSignaling:(TLKSocketIOSignaling *)socketIOSignaling addedStream:(TLKMediaStream *)stream {
     NSLog(@"addedStream");
 
     RTCVideoTrack *localVideoTrack = stream.stream.videoTracks[0];
