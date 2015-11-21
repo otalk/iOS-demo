@@ -27,7 +27,7 @@ PODS:
   - SocketRocket (0.4.2)
   - TLKSimpleWebRTC (1.0.0):
     - AZSocketIO (= 0.0.6)
-  - TLKWebRTC (2.0.1)
+  - TLKWebRTC (2.1.0)
 
 DEPENDENCIES:
   - libjingle_peerconnection
@@ -45,7 +45,7 @@ CHECKOUT OPTIONS:
     :commit: a459335423e98e4540222a86e457f7778c0d9b05
     :git: https://github.com/otalk/TLKSimpleWebRTC.git
   TLKWebRTC:
-    :commit: 738d9f9cb4ec30affeeaf79b249208baceb202a4
+    :commit: 9d5f8dfc9791fe9e541a5ad69b8b763fdbbc94d3
     :git: https://github.com/otalk/TLKWebRTC.git
 
 SPEC CHECKSUMS:
@@ -54,6 +54,6 @@ SPEC CHECKSUMS:
   libjingle_peerconnection: e2068e7c6859c64409345931ee035616c893c107
   SocketRocket: ffe08119b00ef982f6c37052a4705a057c8494ad
   TLKSimpleWebRTC: be2ec60106ed78c034c2a85a2945c49ccf92131f
-  TLKWebRTC: 213224bfeec6e89ac829cd11a593e0f04a845df1
+  TLKWebRTC: ac347a4b53024a2e81ff843d3e984bb1337d3d79
 
 COCOAPODS: 0.39.0

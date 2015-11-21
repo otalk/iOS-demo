@@ -17,8 +17,7 @@
 #import "RTCPeerConnectionDelegate.h"
 
 #import "RTCAudioTrack.h"
-#import "RTCVideoCapturer.h"
-#import "RTCVideoSource.h"
+#import "RTCAVFoundationVideoSource.h"
 #import "RTCVideoTrack.h"
 
 @interface TLKWebRTC () <
@@ -95,9 +94,9 @@ static NSString * const TLKWebRTCSTUNHostname = @"stun:stun.l.google.com:19302";
     [self.localMediaStream addAudioTrack:audioTrack];
 
     if (self.allowVideo) {
-        RTCVideoCapturer *capturer = [RTCVideoCapturer capturerWithDeviceName:[self.videoDevice localizedName]];
-        RTCVideoSource *videoSource = [self.peerFactory videoSourceWithCapturer:capturer constraints:nil];
-        RTCVideoTrack *videoTrack = [self.peerFactory videoTrackWithID:[[NSUUID UUID] UUIDString] source:videoSource];
+        RTCAVFoundationVideoSource *videoSource = [[RTCAVFoundationVideoSource alloc] initWithFactory:self.peerFactory constraints:nil];
+        videoSource.useBackCamera = NO;
+        RTCVideoTrack *videoTrack = [[RTCVideoTrack alloc] initWithFactory:self.peerFactory source:videoSource trackId:[[NSUUID UUID] UUIDString]];
         [self.localMediaStream addVideoTrack:videoTrack];
     }
 }
